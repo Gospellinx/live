@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ray, Will You Be My Valentine? 💫</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;900&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating particles background */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: float-particle 8s infinite ease-in-out;
+    }
+
+    @keyframes float-particle {
+      0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(100px) scale(0); opacity: 0; }
+    }
+
+    /* Main container */
+    .container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    /* Floating hearts */
+    .floating-hearts {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 2rem;
+      animation: float-up 3s ease-in-out infinite;
+    }
+
+    .heart:nth-child(1) { left: -80px; animation-delay: 0s; }
+    .heart:nth-child(2) { left: -40px; animation-delay: 0.5s; }
+    .heart:nth-child(3) { left: 20px; animation-delay: 1s; }
+    .heart:nth-child(4) { left: 80px; animation-delay: 0.5s; }
+    .heart:nth-child(5) { left: 120px; animation-delay: 1.5s; }
+
+    @keyframes float-up {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+
+    /* Main card */
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 60px 50px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3), 0 0 60px rgba(255, 107, 107, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      animation: slideUp 0.8s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      animation: moveGradient 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes moveGradient {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(30px, 30px); }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Main emoji */
+    .main-emoji {
+      font-size: 6rem;
+      animation: pulse-emoji 1.5s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes pulse-emoji {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.2) rotate(10deg); }
+    }
+
+    /* Heading */
+    h1 {
+      font-size: 2.5rem;
+      color: #ff6b6b;
+      margin-bottom: 15px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Subheading */
+    .subtitle {
+      font-size: 1.8rem;
+      color: #e73c7e;
+      margin-bottom: 30px;
+      font-weight: 500;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Name highlight */
+    .name-highlight {
+      font-size: 3rem;
+      color: #ff1744;
+      margin: 20px 0;
+      animation: wave 2s ease-in-out infinite;
+      font-weight: 700;
+      text-shadow: 0 4px 8px rgba(255, 23, 68, 0.3);
+      font-family: 'Playfair Display', serif;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Description text */
+    .description {
+      color: #666;
+      font-size: 1.2rem;
+      margin: 30px 0;
+      line-height: 1.8;
+      position: relative;
+      z-index: 2;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .description p {
+      margin-bottom: 10px;
+    }
+
+    .special-text {
+      color: #ff6b6b;
+      font-weight: 700;
+      font-size: 1.3rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Button container */
+    .buttons {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    button {
+      border: none;
+      border-radius: 25px;
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      font-family: 'Playfair Display', serif;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: left 0.3s;
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    .yes-btn {
+      background: linear-gradient(135deg, #ff6b6b, #ff1744);
+      color: white;
+      min-width: 150px;
+    }
+
+    .yes-btn:hover {
+      transform: scale(1.15) rotate(-5deg);
+      box-shadow: 0 20px 40px rgba(255, 23, 68, 0.5);
+    }
+
+    .yes-btn:active {
+      transform: scale(0.95);
+    }
+
+    .no-btn {
+      background: linear-gradient(135deg, #e0e0e0, #bdbdbd);
+      color: #666;
+      min-width: 150px;
+    }
+
+    .no-btn:hover {
+      position: relative;
+    }
+
+    /* Confetti animation */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: 50%;
+      left: 50%;
+      pointer-events: none;
+    }
+
+    /* Glitch effect */
+    .glitch {
+      position: relative;
+      color: #ff6b6b;
+      font-size: 2rem;
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .glitch::before {
+      animation: glitch-1 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+      color: #ff1744;
+      z-index: -1;
+    }
+
+    .glitch::after {
+      animation: glitch-2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite reverse;
+      color: #e73c7e;
+      z-index: -2;
+    }
+
+    @keyframes glitch-1 {
+      0% { clip-path: inset(0 0 0 0); transform: translate(0); }
+      20% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
+      40% { clip-path: inset(10% 0 50% 0); transform: translate(2px, -2px); }
+      60% { clip-path: inset(50% 0 10% 0); transform: translate(-2px, 2px); }
+      80% { clip-path: inset(20% 0 60% 0); transform: translate(2px, -2px); }
+      100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    }
+
+    @keyframes glitch-2 {
+      0% { clip-path: inset(0 0 0 0); transform: translate(0); }
+      20% { clip-path: inset(20% 0 60% 0); transform: translate(2px, -2px); }
+      40% { clip-path: inset(50% 0 10% 0); transform: translate(-2px, 2px); }
+      60% { clip-path: inset(10% 0 50% 0); transform: translate(2px, -2px); }
+      80% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
+      100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    }
+
+    /* Sparkles */
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      animation: sparkle 1.5s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 15%; right: 15%; animation-delay: 0.5s; }
+    .sparkle:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 1s; }
+    .sparkle:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 0.7s; }
+  
+  </style>
+</head>
+<body>
+
+  <!-- Particles background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Main container -->
+  <div class="container">
+    <!-- Floating hearts -->
+    <div class="floating-hearts">
+      <div class="heart">❤️</div>
+      <div class="heart">💕</div>
+      <div class="heart">💖</div>
+      <div class="heart">💗</div>
+      <div class="heart">💓</div>
+    </div>
+
+    <!-- Main card -->
+    <div class="card">
+      <!-- Sparkles -->
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+
+      <!-- Main emoji -->
+      <div class="main-emoji">💘</div>
+
+      <!-- Heading -->
+      <h1>Hey Ray! 👀</h1>
+
+      <!-- Name highlight -->
+      <div class="name-highlight">You're Incredible 🌟</div>
+
+      <!-- Subtitle -->
+      <p class="subtitle">And I've got something to ask you...</p>
+
+      <!-- Description -->
+      <div class="description">
+        <p>Every moment with you feels like magic ✨</p>
+        <p>Your smile makes my day brighter 🌞</p>
+        <p>Life is so much better with you in it 🎉</p>
+        <p class="special-text">So here's the big question... 💝</p>
+      </div>
+
+      <!-- Glitch effect question -->
+      <h2 class="glitch" data-text="Will You Be My Valentine?">
+        Will You Be My Valentine?
+      </h2>
+
+      <!-- Buttons -->
+      <div class="buttons">
+        <button class="yes-btn" onclick="yesClicked()">YES! 💕</button>
+        <button class="no-btn" onclick="noClicked()">Hmm, No 😅</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Generate random particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+        particle.style.animationDelay = Math.random() * 2 + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Confetti burst
+    function createConfetti() {
+      const colors = ['#ff6b6b', '#ff1744', '#e73c7e', '#ffd600', '#00bcd4'];
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = (Math.random() * 100) + '%';
+        confetti.style.top = (Math.random() * 100) + '%';
+        confetti.style.width = (Math.random() * 8 + 5) + 'px';
+        confetti.style.height = confetti.style.width;
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = '50%';
+        confetti.style.animation = `float-particle ${Math.random() * 3 + 2}s ease-in-out forwards`;
+        document.body.appendChild(confetti);
+      }
+    }
+
+    function yesClicked() {
+      createConfetti();
+      
+      setTimeout(() => {
+        document.body.innerHTML = `
+          <div style="
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab);
+            background-size:400% 400%;
+            animation:gradientShift 15s ease infinite;
+            color:white;
+            text-align:center;
+            font-family:'Segoe UI',sans-serif;
+            flex-direction:column;
+            gap:20px;
+          ">
+            <style>
+              @keyframes gradientShift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+              @keyframes bounce {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.2); }
+              }
+              @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+              .celebration { animation: bounce 0.6s ease-in-out infinite; }
+              .spinner { animation: spin 1s linear infinite; }
+            </style>
+            <div class="celebration" style="font-size:5rem;">🎉</div>
+            <h1 style="font-size:4rem;font-weight:900;text-shadow:0 4px 8px rgba(0,0,0,0.3);margin:0;">YES!!! 🚀</h1>
+            <p style="font-size:2rem;margin:0;">You just made me the happiest! 💖</p>
+            <div class="spinner" style="font-size:3rem;">💕</div>
+            <p style="font-size:1.5rem;margin-top:30px;">Happy Valentine's Day, Ray! 🌹✨</p>
+            <p style="font-size:1.2rem;opacity:0.9;">This is going to be amazing! 💫</p>
+          </div>
+        `;
+      }, 500);
+    }
+
+    function noClicked() {
+      const button = event.target;
+      const randomX = (Math.random() - 0.5) * 200;
+      const randomY = (Math.random() - 0.5) * 200;
+      
+      button.style.transform = `translate(${randomX}px, ${randomY}px)`;
+      button.style.transition = 'all 0.3s ease';
+    }
+
+    // Initialize
+    createParticles();
+  </script>
+
+</body>
+</html>
